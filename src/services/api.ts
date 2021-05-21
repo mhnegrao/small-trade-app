@@ -11,7 +11,7 @@ api.interceptors.response.use(
     if (error.response.status === 401) {
       localStorageRemoveToken();
     }
-  }
+  },
 );
 
 api.interceptors.request.use((req) => {
