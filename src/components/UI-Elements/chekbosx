@@ -1,0 +1,164 @@
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { Bundle } from 'typescript';
+interface DefaultProps {
+  color?: string;
+  background?: string;
+  src?: any;
+  width?: string;
+  height?: string;
+  border?: string;
+  radius?: string;
+  disabled?: false;
+}
+interface DefaultColors {
+  primary: #cccc;
+  warning: #bbbb;
+  success: #dddd;
+  error: #ffff;
+}
+const Input = styled.input`
+  height: 0;
+  width: 0;
+  opacity: 0;
+  z-index: -1;
+`;
+
+const Label = styled.label<DefaultProps>`
+  position: relative;
+  display: inline-block;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  margin: 0.6em 1em;
+`;
+
+const rotate = keyframes`
+ from {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(45deg);
+  }
+`;
+
+const Indicator = styled.div`
+  width: 1.2em;
+  height: 1.2em;
+  background: #e6e6e6;
+  position: absolute;
+  top: 0em;
+  left: -1.6em;
+  border: 1px solid #757575;
+  border-radius: 0.2em;
+
+  ${Input}:not(:disabled):checked & {
+    background: #d1d1d1;
+  }
+
+  ${Label}:hover & {
+    background: #ccc;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+  }
+
+  ${Input}:checked + &::after {
+    display: block;
+    top: 0.1em;
+    left: 0.35em;
+    width: 35%;
+    height: 70%;
+    border: solid #263238;
+    border-width: 0 0.2em 0.2em 0;
+    animation-name: ${rotate};
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+  }
+
+  &::disabled {
+    cursor: not-allowed;
+  }
+`;
+
+export default function Checkbox({
+  value,
+  checked,
+  onChange,
+  name,
+  id,
+  label,
+  disabled,
+}) {
+  return (
+    <Label htmlFor={id} disabled={disabled}>
+      {label}
+      <Input
+        id={id}
+        type="checkbox"
+        name={name}
+        value={value}
+        disabled={disabled}
+        checked={checked}
+        onChange={onChange}
+      />
+      <Indicator />
+    </Label>
+  );
+}
+/**
+ * A Plaid-inspired custom input component
+ *
+ * @param {string} value - the value of the controlled input
+ * @param {string} type - the type of input we'll deal with
+ * @param {string} label - the label used to designate info on how to fill out the input
+ * @param {function} onChange - function called when the input value changes
+ * @param {function} onFocus - function called when the input is focused
+ * @param {function} onBlur - function called when the input loses focus
+ * @param {function} setRef - function used to add this input as a ref for a parent component
+ */
+// @ts-ignore
+const InputField = ({
+  value,
+  type,
+  label,
+  onChange,
+  onFocus,
+  onBlur,
+  setRef,
+  ...props
+}) => {
+  const renderLabel = () => label && <label>{label}</label>;
+
+  return (
+    <InputContainer>
+      {renderLabel()}
+      <input
+        value={value}
+        type={type}
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        ref={(ref) => setRef(ref)}
+        {...props}
+      />
+    </InputContainer>
+  );
+};
+
+InputField.defaultProps = {
+  type: 'text',
+  label: '',
+  onChange: (text) => {
+    console.error(`Missing onChange prop: ${text}`);
+  },
+  onFocus: () => {},
+  onBlur: () => {},
+  setRef: () => {},
+};
+
+export default InputField;
+// export const PasswordInput = styled.input.attrs({

@@ -10,6 +10,8 @@ import Login from './pages/login';
 // import CreateChocolate from './pages/create-chocolate';
 import GlobalStyle from './styles/global';
 import Profile from './pages/profile/index';
+import Servicos from './pages/profile/servicos';
+import Financas from './pages/profile/financas';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,6 +19,8 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
+        <Route path="/servicos" exact component={Servicos} />
+        <Route path="/financas" exact component={Financas} />
         <Route path="/profile" exact component={Profile} />
       </Switch>
     </Router>

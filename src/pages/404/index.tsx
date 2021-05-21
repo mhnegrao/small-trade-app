@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container } from '../../components/container';
+import { Container } from '../../components/UI-Elements';
 import { PageNumber } from './style';
 
 function NotFound() {

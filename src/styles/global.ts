@@ -12,7 +12,7 @@ export default createGlobalStyle`
   }
   body{
     font-family: Helvetica, sans-serif;
-    background-color: navy;
+    background-color: "#ffffd7";
     -webkit-font-smoothing: antialiased;
   }
   a{
