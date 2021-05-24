@@ -6,12 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import Home from './pages/home';
 import Login from './pages/login';
 // import NotFound from './pages/404';
-// import CreateUser from './pages/create-user';
-// import CreateChocolate from './pages/create-chocolate';
+
 import GlobalStyle from './styles/global';
 import Profile from './pages/profile/index';
 import Servicos from './pages/profile/servicos';
 import Financas from './pages/profile/financas';
+import Tarefas from './pages/profile/tarefas';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +21,7 @@ ReactDOM.render(
         <Route path="/login" exact component={Login} />
         <Route path="/servicos" exact component={Servicos} />
         <Route path="/financas" exact component={Financas} />
+        <Route path="/tarefas" exact component={Tarefas} />
         <Route path="/profile" exact component={Profile} />
       </Switch>
     </Router>
