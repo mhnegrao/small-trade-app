@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { StyledFunction as Function } from 'styled-components';
-import { IMaskInput } from 'react-imask';
+
+import { ReactInputMask as InputMask, Props } from 'react-input-mask';
 
 const colorDefault: string = '#000000';
 const backGroundDefault = '#ffffd7';
@@ -33,6 +34,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const InputGroup = styled.div`
   position: relative;
+  margin: 6px;
 `;
 
 const InputLabel = styled.label`
@@ -115,9 +117,9 @@ export const Button = styled.button<DefaultProps>`
 
 const InputField = styled.input`
   outline: none;
-  padding: 16px 22px;
+  padding: 5px;
   border: 1px solid #dadce0;
-  font-size: 18px;
+  font-size: 14px;
   border-radius: 5px;
 
   &:focus {
@@ -126,14 +128,14 @@ const InputField = styled.input`
 
   &:valid + ${InputLabel} {
     top: -1px;
-    padding: 0 3px;
-    font-size: 14px;
+    padding: 5px 5px;
+    font-size: 13px;
     color: #8d8d8d;
   }
 
   &:focus + ${InputLabel} {
     top: -1px;
-    padding: 0 3px;
+    padding: 5px 5px;
     font-size: 14px;
     color: royalblue;
     transition: 300ms;
@@ -165,21 +167,6 @@ const InputContainer = styled.div`
   }
 `;
 
-// const MaskedStyledInput = IMaskMixin(({ InputProps, ...rest }) => (
-//   <StyledInput
-//     {...props}
-//     innerRef={inputRef} // bind internal input (if you use styled-components V4, use "ref" instead "innerRef")
-//   />
-// ));
-// <MaskedStyledInput
-//   mask={Date}
-//   radix="."
-//   onAccept={(value, mask) => console.log(value)}
-//   // ...and more mask props in a guide
-
-//   // ...other styled props
-// />
-
 // @ts-ignore
 export const Input: React.FC<InputProps> = ({ id, label, name, ...rest }) => {
   return (
@@ -189,6 +176,25 @@ export const Input: React.FC<InputProps> = ({ id, label, name, ...rest }) => {
         <InputLabel htmlFor={id}>{label}</InputLabel>
       </InputGroup>
     </>
+  );
+};
+export const MaskInput: React.FC<Props> = ({
+  type,
+  name,
+  value,
+  onChange,
+  mask,
+  placeholder,
+}) => {
+  return (
+    <InputMask
+      type={type}
+      name={name}
+      mask={mask}
+      onChange={onChange}
+      value={value}
+      placeholder={placeholder}
+    />
   );
 };
 export const BarHeader = styled.h2<DefaultProps>`

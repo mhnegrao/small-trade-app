@@ -1,11 +1,11 @@
 import React, { useState, useRef, MouseEvent } from 'react';
 import ReactDOM from 'react-dom';
-import IMask from 'imask';
 
 import {
   Container,
   Panel,
   Header,
+  MaskInput,
   Input,
   Button,
   ListItens,
@@ -62,10 +62,11 @@ const Tarefas: React.FC = () => {
               setValue(event.target.value)
             }
           />
-          <Input
+          <MaskInput
             name="dataCompromisso"
-            label="Data do Compromisso/Agenda"
-            type="text"
+            placeholder="Data do Compromisso/Agenda"
+            type="date"
+            mask="99/99/9999"
             value={valueDate}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setValueDate(event.target.value)
