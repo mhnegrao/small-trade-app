@@ -5,6 +5,8 @@ import {
   Input,
   Header,
   Container,
+  Col,
+  Row,
 } from '../../../../components/UI-Elements';
 import { ServicoForm } from './sryle';
 
@@ -14,19 +16,41 @@ const ServicoCad = () => {
       <ServicoForm>
         <Container>
           <Header>Cadastro de Novos Serviços</Header>
-          <Input label="Servico" />
-          <Input label="Cliente" />
-          <Input label="Email" />
-          <Input label="Fone" />
-          <Input label="Solicitação" />
-          <Input label="Entrega" />
-          <Input label="Valor" />
-          <Input label="Observação" />
-
-          <Button>Salvar</Button>
+          <Row>
+            <Col>
+              <Input height="20px" label="Servico" />
+            </Col>
+            <Col>
+              <Input label="Valor" />
+            </Col>
+            <Col>
+              <Input label="Cliente" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Input label="Email" />
+            </Col>
+            <Col>
+              <Input label="Fone" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Input label="Data Solicitação" />
+            </Col>
+            <Col>
+              <Input label="Data Prevista Entrega" />
+            </Col>
+          </Row>
+          <Row>
+            <Input label="Observação" />
+          </Row>
+          <Row>
+            <Button>Salvar Serviço</Button>
+          </Row>
         </Container>
       </ServicoForm>
-      ;
     </>
   );
 };

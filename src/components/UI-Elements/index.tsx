@@ -4,11 +4,12 @@ import styled, { StyledFunction as Function } from 'styled-components';
 import { ReactInputMask as InputMask, Props } from 'react-input-mask';
 
 const colorDefault: string = '#000000';
-const backGroundDefault = '#ffffd7';
-interface DefaultProps {
+const backGroundDefault = '#ffffd71';
+interface DefaultProps extends React.InputHTMLAttributes<HTMLInputElement> {
   color?: string;
   hoverColor?: string;
   backgroundColor?: string;
+  label?: string;
   src?: any;
   width?: string;
   height?: string;
@@ -34,17 +35,19 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const InputGroup = styled.div`
   position: relative;
-  margin: 6px;
+  margin: 10px;
+  label {
+    margin-left: 8px;
+  }
+  input[type=text] {height: 20px;}
 `;
 
 const InputLabel = styled.label`
   color: #8d8d8d;
-  position: absolute;
-  top: 27px;
-  left: 55px;
+  position: relative;
+  top: 5px;
+  left: 10px;
   background: #ffffff;
-  transition: 300ms;
-  transform: translate(-50%, -50%);
 `;
 
 export const Container = styled.div`
@@ -53,7 +56,7 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 800px;
   background-color: #fff;
-  align-items: center;
+  align-items: flex-start;
   margin: 5px auto;
   cursor: default;
   border: 1px;
@@ -66,7 +69,16 @@ export const Container = styled.div`
     flex-direction: row;
   }
 `;
-
+export const Row =styled.div`
+padding: 1px;
+  display: flex;
+  flex-direction: row;
+ 
+`;
+export const Col =styled.div`
+padding: 1px;
+  display: flex;
+  flex-direction: column;`;
 export const Button = styled.button<DefaultProps>`
   display: inline-block;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -84,63 +96,63 @@ export const Button = styled.button<DefaultProps>`
 
   &:hover {
     cursor: pointer;
-    background-color: ${(props) => props.hoverColor || '#4caf50'}; /* Green */
+    background-color: ${(props) => props.hoverColor || '#788879'}; /* Green */
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
     color: white;
   }
 `;
-// const Input = styled.input.attrs<DefaultProps>({})`
-//   box-sizing: border-box;
-//   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-//   font-size: ${(props: DefaultProps) => props.fontsize || '16px'};
-//   padding: 2px 5px;
-//   border: 1px solid green;
-//   padding: 0.5em;
-//   margin: 0.5em;
-//   color: ${(props: DefaultProps) => props.color || colorDefault};
-//   background: ${(props: DefaultProps) =>
-//     props.backgroundColor || backGroundDefault};
-//   border-width: ${(props: DefaultProps) => props.border || 'none'};
-//   border-color: ${(props: DefaultProps) => props.borderColor || colorDefault};
-//   border-radius: ${(props: DefaultProps) => props.radius};
-//   width: ${(props: DefaultProps) => props.width};
-//   height: ${(props: DefaultProps) => props.height};
+const InputField = styled.input.attrs<DefaultProps>({})`
+  box-sizing: border-box;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: ${(props: DefaultProps) => props.fontsize || '16px'};
+  padding: 2px 5px;
+  border: 1px solid green;
+  padding: 0.5em;
+  margin: 1px;
+  color: ${(props: DefaultProps) => props.color || colorDefault};
+  background: ${(props: DefaultProps) =>
+    props.backgroundColor || backGroundDefault};
+  border-width: ${(props: DefaultProps) => props.border || 'none'};
+  border-color: ${(props: DefaultProps) => props.borderColor || colorDefault};
+  border-radius: ${(props: DefaultProps) => props.radius};
+  width: ${(props: DefaultProps) => props.width};
+  height: ${(props: DefaultProps) => props.height || '15px'};
 
-//   &:hover {
-//     cursor: text;
-//     background-color: ${(props) => props.hoverColor || '#4caf50'}; /* Green */
-//     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-//       0 17px 50px 0 rgba(0, 0, 0, 0.19);
-//   }
-// `;
-
-const InputField = styled.input`
-  outline: none;
-  padding: 5px;
-  border: 1px solid #dadce0;
-  font-size: 14px;
-  border-radius: 5px;
-
-  &:focus {
-    border: 2px solid royalblue;
-  }
-
-  &:valid + ${InputLabel} {
-    top: -1px;
-    padding: 5px 5px;
-    font-size: 13px;
-    color: #8d8d8d;
-  }
-
-  &:focus + ${InputLabel} {
-    top: -1px;
-    padding: 5px 5px;
-    font-size: 14px;
-    color: royalblue;
-    transition: 300ms;
+  &:hover {
+    cursor: text;
+    background-color: ${(props) => props.hoverColor || '#d4d8d4'}; /* Green */
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
 `;
+
+// const InputField = styled.input`
+//   outline: none;
+//   padding: 5px;
+//   border: 1px solid #dadce0;
+//   font-size: 14px;
+//   border-radius: 5px;
+
+//   &:focus {
+//     border: 2px solid royalblue;
+//   }
+
+//   &:valid + ${InputLabel} {
+//     top: -1px;
+//     padding: 5px 5px;
+//     font-size: 13px;
+//     color: #8d8d8d;
+//   }
+
+//   &:focus + ${InputLabel} {
+//     top: -1px;
+//     padding: 5px 5px;
+//     font-size: 14px;
+//     color: royalblue;
+//     transition: 300ms;
+//   }
+// `;
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -168,12 +180,14 @@ const InputContainer = styled.div`
 `;
 
 // @ts-ignore
-export const Input: React.FC<InputProps> = ({ id, label, name, ...rest }) => {
+export const Input: React.FC<DefaultProps> = ({ id, label, name, ...rest }) => {
   return (
     <>
       <InputGroup>
+        <p>
+          <label htmlFor={id}>{label}</label>
+        </p>
         <InputField name={name} id={id} {...rest} />
-        <InputLabel htmlFor={id}>{label}</InputLabel>
       </InputGroup>
     </>
   );
@@ -223,10 +237,10 @@ export const Header = styled.div<DefaultProps>`
   padding: 0.5em;
   margin: 0.5em auto;
   color: ${(props) => props.color || colorDefault};
-  /* background-color: ${(props) =>
-    props.backgroundColor || backGroundDefault}; */
+  background-color: ${(props) =>
+    props.backgroundColor || backGroundDefault};
   border: none;
-  font-size: 20px;
+  font-size: 30px;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
 `;
