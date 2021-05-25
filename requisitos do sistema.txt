@@ -1,0 +1,26 @@
+REQUISITOS (FEATURE - SERVIÇOS)
+
+(CADASTRO DO SERVIÇO (INCLUSÃO))
+
+- (*)DESCRIÇÃO DO SERVIÇOS ex: Trocar pastilha de freio
+- (*)CLIENTE		ex: Rose
+- (*)INFORMAÇÕES DE CONTATO
+	- FONE  ex: (11) 99999.0000
+	- EMAIL ex: rose@email.com
+
+- (*)DATA SOLICITAÇÃO ex: 24/05/2021
+- (*)DATA PREVISTA ENTREGA/PRESTAÇÃO ex: 28/05/2021
+- (*)VALOR (R$) ex: 200,00 
+- (*)FINALIZADO (SIM/NÃO) ex: Não
+- (*)PAGO (SIM/NÃO) ex: NÃO
+- (*)TIPO DE PAGAMENTO (dinheiro/debito/crédito/PIX) ex: crédito
+- OBSERVAÇÃO ex: Pastilha de freio do Corsa/2001
+
+[*]= PREENCHIMENTO OBRIGATÓRIO
+
+(EXIBIÇÃO INICIAL DOS SERVIÇOS CADASTRADOS)
+
+- CLIENTE - DESCRIÇÃO DO SERVIÇO / VALOR(R$) / FINALIZADO(S/N)
+- CONTATO (EMAIL/FONE) - DATA (SOLICITAÇÃO/ENTREGA)
+- PAGO COM: (D///) - PAGO EM: 99/99/9999
+- OBSERVAÇÃO
