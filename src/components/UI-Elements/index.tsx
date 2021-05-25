@@ -1,6 +1,9 @@
 import React from 'react';
 import styled, { StyledFunction as Function } from 'styled-components';
+import { IMaskInput } from 'react-imask';
 
+const colorDefault: string = '#000000';
+const backGroundDefault = '#ffffd7';
 interface DefaultProps {
   color?: string;
   hoverColor?: string;
@@ -15,9 +18,32 @@ interface DefaultProps {
   placeholder?: string;
   type?: string;
 }
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  id?: string;
+  label?: string;
+  fontsize?: string;
+  placeholder?: string;
+  radius?: string;
+  border?: string;
+  borderColor?: string;
+  color?: string;
+  hoverColor?: string;
+  backgroundColor?: string;
+}
 
-const colorDefault: string = '#000000';
-const backGroundDefault = '#ffffd7';
+const InputGroup = styled.div`
+  position: relative;
+`;
+
+const InputLabel = styled.label`
+  color: #8d8d8d;
+  position: absolute;
+  top: 27px;
+  left: 55px;
+  background: #ffffff;
+  transition: 300ms;
+  transform: translate(-50%, -50%);
+`;
 
 export const Container = styled.div`
   padding: 10px;
@@ -62,28 +88,55 @@ export const Button = styled.button<DefaultProps>`
     color: white;
   }
 `;
-export const Input = styled.input.attrs<DefaultProps>({})`
-  box-sizing: border-box;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-size: ${(props: DefaultProps) => props.fontsize || '16px'};
-  padding: 2px 5px;
-  border: 1px solid green;
-  padding: 0.5em;
-  margin: 0.5em;
-  color: ${(props: DefaultProps) => props.color || colorDefault};
-  background: ${(props: DefaultProps) =>
-    props.backgroundColor || backGroundDefault};
-  border-width: ${(props: DefaultProps) => props.border || 'none'};
-  border-color: ${(props: DefaultProps) => props.borderColor || colorDefault};
-  border-radius: ${(props: DefaultProps) => props.radius};
-  width: ${(props: DefaultProps) => props.width};
-  height: ${(props: DefaultProps) => props.height};
+// const Input = styled.input.attrs<DefaultProps>({})`
+//   box-sizing: border-box;
+//   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//   font-size: ${(props: DefaultProps) => props.fontsize || '16px'};
+//   padding: 2px 5px;
+//   border: 1px solid green;
+//   padding: 0.5em;
+//   margin: 0.5em;
+//   color: ${(props: DefaultProps) => props.color || colorDefault};
+//   background: ${(props: DefaultProps) =>
+//     props.backgroundColor || backGroundDefault};
+//   border-width: ${(props: DefaultProps) => props.border || 'none'};
+//   border-color: ${(props: DefaultProps) => props.borderColor || colorDefault};
+//   border-radius: ${(props: DefaultProps) => props.radius};
+//   width: ${(props: DefaultProps) => props.width};
+//   height: ${(props: DefaultProps) => props.height};
 
-  &:hover {
-    cursor: text;
-    background-color: ${(props) => props.hoverColor || '#4caf50'}; /* Green */
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+//   &:hover {
+//     cursor: text;
+//     background-color: ${(props) => props.hoverColor || '#4caf50'}; /* Green */
+//     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+//       0 17px 50px 0 rgba(0, 0, 0, 0.19);
+//   }
+// `;
+
+const InputField = styled.input`
+  outline: none;
+  padding: 16px 22px;
+  border: 1px solid #dadce0;
+  font-size: 18px;
+  border-radius: 5px;
+
+  &:focus {
+    border: 2px solid royalblue;
+  }
+
+  &:valid + ${InputLabel} {
+    top: -1px;
+    padding: 0 3px;
+    font-size: 14px;
+    color: #8d8d8d;
+  }
+
+  &:focus + ${InputLabel} {
+    top: -1px;
+    padding: 0 3px;
+    font-size: 14px;
+    color: royalblue;
+    transition: 300ms;
   }
 `;
 const InputContainer = styled.div`
@@ -112,6 +165,32 @@ const InputContainer = styled.div`
   }
 `;
 
+// const MaskedStyledInput = IMaskMixin(({ InputProps, ...rest }) => (
+//   <StyledInput
+//     {...props}
+//     innerRef={inputRef} // bind internal input (if you use styled-components V4, use "ref" instead "innerRef")
+//   />
+// ));
+// <MaskedStyledInput
+//   mask={Date}
+//   radix="."
+//   onAccept={(value, mask) => console.log(value)}
+//   // ...and more mask props in a guide
+
+//   // ...other styled props
+// />
+
+// @ts-ignore
+export const Input: React.FC<InputProps> = ({ id, label, name, ...rest }) => {
+  return (
+    <>
+      <InputGroup>
+        <InputField name={name} id={id} {...rest} />
+        <InputLabel htmlFor={id}>{label}</InputLabel>
+      </InputGroup>
+    </>
+  );
+};
 export const BarHeader = styled.h2<DefaultProps>`
   font-size: 20px;
   font-weight: bold;
@@ -172,4 +251,5 @@ export const ListItens = styled.ul<DefaultProps>`
     }
   }
 `;
+
 export const Footer = styled.div<DefaultProps>``;

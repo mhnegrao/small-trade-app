@@ -53,7 +53,7 @@ const Profile = () => {
             onClick={() => handleClick(<Tarefas />)}
           >
             {/* <RiCurrencyFill size={40} /> */}
-            Tarefas
+            Agenda
           </Button>
           <Button
             color="#f9faf6"

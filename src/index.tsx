@@ -12,6 +12,7 @@ import Profile from './pages/profile/index';
 import Servicos from './pages/profile/servicos';
 import Financas from './pages/profile/financas';
 import Tarefas from './pages/profile/tarefas';
+import ServicoCad from './pages/profile/servicos/form';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route path="/financas" exact component={Financas} />
         <Route path="/tarefas" exact component={Tarefas} />
         <Route path="/profile" exact component={Profile} />
+        <Route path="/servico-cad" exact component={ServicoCad} />
       </Switch>
     </Router>
 

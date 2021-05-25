@@ -1,5 +1,6 @@
 import React, { useState, useRef, MouseEvent } from 'react';
 import ReactDOM from 'react-dom';
+import IMask from 'imask';
 
 import {
   Container,
@@ -20,6 +21,7 @@ interface ITask {
 const Tarefas: React.FC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [value, setValue] = useState<string>('');
+  const [valueDate, setValueDate] = useState<string>('');
 
   // const useFocus = () => {
   //   const htmlElRef = useRef();
@@ -48,24 +50,28 @@ const Tarefas: React.FC = () => {
   return (
     <div>
       <Panel>
-        <Header>Tarefas</Header>
+        <Header>Agenda de Compromissos</Header>
+
         <form onSubmit={handleSubmitForm}>
           <Input
+            name="descricao"
+            label="Descrição do Compromisso"
             type="text"
-            fontsize="16px"
-            placeholder="Descreva sua tarefa aqui"
-            radius="3px"
-            backgroundColor="#c1d2d4"
-            height="30px"
-            width="400px"
-            border="1px"
-            borderColor="#13023b"
-            hoverColor="#ffffaf"
             value={value}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setValue(event.target.value)
             }
           />
+          <Input
+            name="dataCompromisso"
+            label="Data do Compromisso/Agenda"
+            type="text"
+            value={valueDate}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setValueDate(event.target.value)
+            }
+          />
+          <br />
           <Button
             type="submit"
             height="40"
@@ -80,7 +86,7 @@ const Tarefas: React.FC = () => {
 
         <ListItens>
           <h5>Tarefas/Compromissos</h5>
-          {console.log(tasks[0])}
+
           {tasks.map((task: ITask) => (
             <li key={task.id}>
               <div>
