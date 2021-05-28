@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-
+import img from '../images/background4.jpg';
 export default createGlobalStyle`
   *{
     padding: 0;
@@ -12,7 +12,11 @@ export default createGlobalStyle`
   }
   body{
     font-family: Helvetica, sans-serif;
-    background-color: "#ffffd7";
+    background-image:url(${img});
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+   
     -webkit-font-smoothing: antialiased;
   }
   a{

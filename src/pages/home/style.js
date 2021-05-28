@@ -1,10 +1,22 @@
 import styled from 'styled-components';
 
-export const TitleHeader = styled.h2`
+export const TitleHeader = styled.h2 `
   font-size: 30px;
   font-weight: bold;
 `;
-export const ButtonBar = styled.button`
+export const Start = styled.div ` 
+padding: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  
+  align-items: center;
+  margin: 30px auto;
+.sign-in-ico:hover{
+    cursor: pointer;
+   
+  }`;
+export const ButtonBar = styled.button `
   button {
     padding: 10px;
     border-radius: 5px;
@@ -22,4 +34,6 @@ export const ButtonBar = styled.button`
     cursor: pointer;
     background-color: #ff9839;
   }
+
+  
 `;

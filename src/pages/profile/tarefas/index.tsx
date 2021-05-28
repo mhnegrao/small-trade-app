@@ -1,105 +1,127 @@
-import React, { useState, useRef, MouseEvent } from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 import {
-  Container,
-  Panel,
-  Header,
-  MaskInput,
-  Input,
   Button,
-  ListItens,
-} from '../../../components/UI-Elements';
+  Container,
+  Header,
+  Input,
+  Divider,
+  List,
+} from 'semantic-ui-react';
 
 interface ITask {
-  id: number;
+  id?: number;
+  titulo?: string;
   descricao?: string;
+  dataTarefa?: Date;
   completed?: boolean;
-  createdAt?: string | Date;
+  completed_At?: Date;
+  created_At?: Date;
 }
 
+const formatDate = (date: Date, format: string) => {
+  let dateFormated = moment(date).format(format);
+  return dateFormated;
+};
+
 const Tarefas: React.FC = () => {
+
   const [tasks, setTasks] = useState<ITask[]>([]);
-  const [value, setValue] = useState<string>('');
-  const [valueDate, setValueDate] = useState<string>('');
+  const [tarefa, setTarefa] = useState<ITask>({});
+ 
+  useEffect(() => {
+    loadTasks();
+  });
 
-  // const useFocus = () => {
-  //   const htmlElRef = useRef();
-  //   const setFocus = () => {
-  //     htmlElRef.current && htmlElRef.current.focus();
-  //   };
+  const loadTasks = () => {};
 
-  //   return [htmlElRef, setFocus];
-  // };
-  // const [inputRef, setInputFocus] = useFocus();
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTarefa({
+      ...tarefa,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    console.log('tarefa',tarefa);
     const newTask: ITask = {
       id: tasks.length + 1,
-      descricao: value,
-      completed: false,
-      createdAt: new Date(),
+      titulo: tarefa.titulo,
+      descricao: tarefa.descricao,
+      dataTarefa: tarefa.dataTarefa,
+      created_At: new Date(),
     };
 
     setTasks([...tasks, newTask]);
-    setValue('');
+    resetFields();
   };
-
+  const resetFields = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = "")
+    );
+    
+    //tituloInputRef.focus()
+  };
   return (
-    <div>
-      <Panel>
+    <>
+      <Container>
         <Header>Agenda de Compromissos</Header>
 
         <form onSubmit={handleSubmitForm}>
           <Input
+            required
+            id="titulo"
+            name="titulo"
+            label="Título"
+            variant="primary"
+            onChange={handleInputChange}
+            
+            
+          />
+
+          <Input
+            required
+            id="descricao"
             name="descricao"
-            label="Descrição do Compromisso"
-            type="text"
-            value={value}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setValue(event.target.value)
-            }
+            label="Descrição"
+            onChange={handleInputChange}
           />
-          <MaskInput
-            name="dataCompromisso"
-            placeholder="Data do Compromisso/Agenda"
+          <Input
+            id="dataTarefa"
+            name="dataTarefa"
             type="date"
-            mask="99/99/9999"
-            value={valueDate}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setValueDate(event.target.value)
-            }
+            label="Data"
+            onChange={handleInputChange}
           />
-          <br />
-          <Button
-            type="submit"
-            height="40"
-            fontsize="20px"
-            border="none"
-            radius="8px"
-            backgroundColor="#5faf87"
-          >
-            Adicionar
+
+          <Button type="submit" primary>
+            Agendar
           </Button>
         </form>
+        <Divider />
 
-        <ListItens>
-          <h5>Tarefas/Compromissos</h5>
+        <Header>Compromissos Agendados</Header>
 
-          {tasks.map((task: ITask) => (
-            <li key={task.id}>
-              <div>
-                <h5>{task.descricao}</h5>
-
-                <p>Completada: {task.completed}</p>
-              </div>
-            </li>
-          ))}
-        </ListItens>
-      </Panel>
-    </div>
+        {tasks.map((item, index) => (
+          <div>
+            <List key={index} divided relaxed>
+              <List.Item>
+                <List.Header>{item.titulo}</List.Header>
+                <List.Content>{item.descricao}</List.Content>
+                <List.Content>{item.dataTarefa}</List.Content>
+                <List.Content floated="left">
+                  <Button>Add</Button>
+                </List.Content>
+              </List.Item>
+            </List>
+          </div>
+        ))}
+      </Container>
+    </>
   );
 };
 

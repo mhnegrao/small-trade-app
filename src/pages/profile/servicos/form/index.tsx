@@ -1,58 +1,28 @@
-import React, { useState, useRef, MouseEvent } from 'react';
-import ReactDOM from 'react-dom';
-import {
-  Button,
-  Input,
-  Header,
-  Container,
-  Col,
-  Row,
-} from '../../../../components/UI-Elements';
-import { ServicoForm } from './sryle';
+import React from 'react'
+import { Form, Container } from 'semantic-ui-react'
 
-const ServicoCad = () => {
-  return (
-    <>
-      <ServicoForm>
-        <Container>
-          <Header>Cadastro de Novos Serviços</Header>
-          <Row>
-            <Col>
-              <Input height="20px" label="Servico" />
-            </Col>
-            <Col>
-              <Input label="Valor" />
-            </Col>
-            <Col>
-              <Input label="Cliente" />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Input label="Email" />
-            </Col>
-            <Col>
-              <Input label="Fone" />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Input label="Data Solicitação" />
-            </Col>
-            <Col>
-              <Input label="Data Prevista Entrega" />
-            </Col>
-          </Row>
-          <Row>
-            <Input label="Observação" />
-          </Row>
-          <Row>
-            <Button>Salvar Serviço</Button>
-          </Row>
-        </Container>
-      </ServicoForm>
-    </>
-  );
-};
+const ServicoCad = () => (
+  <Container>
+<Form>
+ 
+    <Form.Group>
+      <Form.Input label='First name' placeholder='First Name' width={6} />
+      <Form.Input label='Middle Name' placeholder='Middle Name' width={4} />
+      <Form.Input label='Last Name' placeholder='Last Name' width={6} />
+    </Form.Group>
+    <Form.Group>
+      <Form.Input placeholder='2 Wide' width={2} />
+      <Form.Input placeholder='12 Wide' width={12} />
+      <Form.Input placeholder='2 Wide' width={2} />
+    </Form.Group>
+    <Form.Group>
+      <Form.Input placeholder='8 Wide' width={8} />
+      <Form.Input placeholder='6 Wide' width={6} />
+      <Form.Input placeholder='2 Wide' width={2} />
+    </Form.Group>
+  </Form>
 
-export default ServicoCad;
+</Container>
+)
+
+export default ServicoCad
