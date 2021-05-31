@@ -16,4 +16,14 @@ export interface IServico {
     completed_At?: Date;
     created_At?: Date;
   }
+  export interface ILancamento{
+    id?: number;
+    descricao?: string;
+    dataLancamento?: Date;
+    valor?: number;
+    observacao?: string;
+    tipoPlancamento?: 'Débito' | 'Crédito' | 'Estorno';
+    created_At?: Date;
+    updated_At?: Date;
+  }
   

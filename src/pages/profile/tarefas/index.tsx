@@ -59,7 +59,7 @@ const Tarefas: React.FC = () => {
   };
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('tarefa', tarefa);
+    
     const newTask: ITask = {
       id: tasks.length + 1,
       titulo: tarefa.titulo,
@@ -76,7 +76,7 @@ const Tarefas: React.FC = () => {
       (input) => (input.value = '')
     );
 
-    //tituloInputRef.focus()
+    
   };
   return (
     <>

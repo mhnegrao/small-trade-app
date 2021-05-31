@@ -1,13 +1,2 @@
 {
-    "colorTabs.config": [
-        {
-            "regex": "src/pages/profile/tarefas/.*"
-        },
-        {
-            "regex": ".*/web/.*"
-        },
-        {
-            "regex": ".*/mobile/.*"
-        }
-    ]
 }
