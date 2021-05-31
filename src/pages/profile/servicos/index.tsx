@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import {
   Button,
@@ -6,87 +6,106 @@ import {
   Grid,
   Header,
   Icon,
-  Table
+  Table,
+  Image,
+  Modal,
 } from 'semantic-ui-react';
-import { ServicoForm } from './form/style';
+import ServicoCad from './form';
+import { IServico } from '../../../services/interfaces';
+import ServicoContext from '../../../contexts/profile';
 
 const Servicos = () => {
+  const [open, setOpen] = useState(false);
+  const [esteServico, setServico] = useState<IServico>({} as IServico);
+  const [servicoList, setServicoList] = useState<IServico[]>([]);
+  const [submitFunc, setSubmitFunc] = useState();
+  const { servico } = useContext(ServicoContext);
+
+  const submitForm = () => {
+    if (submitFunc) {
+      //@ts-ignore
+      submitFunc.current();
+    }
+  };
+  const handleSubmitForm = () => {
+    // const newTask: ITask = {
+    //   id: tasks.length + 1,
+    //   titulo: tarefa.titulo,
+    //   descricao: tarefa.descricao,
+    //   dataTarefa: tarefa.dataTarefa,
+    //   created_At: new Date(),
+    // };
+    setServico(servico);
+    console.log(`Descrição: ${servico.valor}`);
+    setServicoList([...servicoList, servico]);
+    setOpen(false);
+  };
   function handleClick(page: JSX.Element): void {
     ReactDOM.render(page, document.getElementById('showhere'));
   }
 
   return (
     <div>
-      <Header>Serviços</Header>
-      <Button
-        primary
-        onClick={() => handleClick(<ServicoForm />)}
+      <Header as="h1">Serviços</Header>
+      <Modal
+        as="form"
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+        trigger={
+          <Button icon="plus" color="green">
+            Adicionar Novo Serviço
+          </Button>
+        }
       >
-        Novo Serviço{' '}
-      </Button>
+        {/* <Modal.Header>Serviço Novo</Modal.Header> */}
+        <Modal.Content>
+          <ServicoCad {...servico} />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="red" onClick={() => setOpen(false)}>
+            Cancelar
+          </Button>
+          <Button
+            content="Salvar"
+            labelPosition="right"
+            icon="checkmark"
+            onClick={handleSubmitForm}
+            positive
+          />
+        </Modal.Actions>
+      </Modal>
+      {console.log(servico)}
       <section>
-        <Table striped >
+        <Table striped>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Date Joined</Table.HeaderCell>
-              <Table.HeaderCell>E-mail</Table.HeaderCell>
-              <Table.HeaderCell>Called</Table.HeaderCell>
+              <Table.HeaderCell>Serviço</Table.HeaderCell>
+              <Table.HeaderCell>Cliente</Table.HeaderCell>
+              <Table.HeaderCell>Fone</Table.HeaderCell>
+              <Table.HeaderCell>Pago</Table.HeaderCell>
+              <Table.HeaderCell>Data Pagamento</Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>John Lilki</Table.Cell>
-              <Table.Cell>September 14, 2013</Table.Cell>
-              <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-              <Table.Cell>No</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Jamie Harington</Table.Cell>
-              <Table.Cell>January 11, 2014</Table.Cell>
-              <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-              <Table.Cell>Yes</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Jill Lewis</Table.Cell>
-              <Table.Cell>May 11, 2014</Table.Cell>
-              <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-              <Table.Cell>Yes</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>John Lilki</Table.Cell>
-              <Table.Cell>September 14, 2013</Table.Cell>
-              <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-              <Table.Cell>No</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>John Lilki</Table.Cell>
-              <Table.Cell>September 14, 2013</Table.Cell>
-              <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-              <Table.Cell>No</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Jamie Harington</Table.Cell>
-              <Table.Cell>January 11, 2014</Table.Cell>
-              <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-              <Table.Cell>Yes</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Jill Lewis</Table.Cell>
-              <Table.Cell>May 11, 2014</Table.Cell>
-              <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-              <Table.Cell>Yes</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>John Lilki</Table.Cell>
-              <Table.Cell>September 14, 2013</Table.Cell>
-              <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-              <Table.Cell>No</Table.Cell>
-            </Table.Row>
+            {servicoList.map((item, index) => (
+              <>
+                <Table.Row>
+                  <Table.Cell>{item.servico}</Table.Cell>
+                  <Table.Cell>{item.cliente}</Table.Cell>
+                  <Table.Cell>{item.fone}</Table.Cell>
+                  <Table.Cell>{item.pago}</Table.Cell>
+                  <Table.Cell>{item.dataPagamento}</Table.Cell>
+                  <Table.Cell>Uma Ação</Table.Cell>
+                </Table.Row>
+              </>
+            ))}
           </Table.Body>
         </Table>
       </section>
+      <br />
     </div>
   );
 };
