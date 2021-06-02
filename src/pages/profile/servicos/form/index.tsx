@@ -43,7 +43,7 @@ const ServicoCad = (props: IServico) => {
       <Container>
         {/* <Header as="h1">Cadastro de Serviço</Header> */}
         <Form onSubmit={handleSubmit}>
-          <Header color="blue">Informações do Novo Serviço</Header>
+          <Header color="blue">Serviço <strong>Finalizado</strong></Header>
           <Form.Group>
             <Form.Input
               label="Serviço"

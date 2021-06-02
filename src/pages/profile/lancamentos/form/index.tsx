@@ -59,13 +59,45 @@ const LancamentoCad = (props: ILancamento) => {
               onChange={handleInputChange}
             />
             <Form.Input
-              label="Data do Lançamento"
+              label="Data"
               name="dataLancamento"
               type="date"
               placeholder="Middle Name"
               width={4}
               value={props.dataLancamento}
               onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            
+            <Form.Field>
+              <Radio
+                label="Débito"
+                name="tipoPagamento"
+                //value={props.tipoPagamento}
+                // checked={this.state.value === 'that'}
+                // onChange={this.handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Radio
+                label="Crédito"
+                name="tipoPagamento"
+                //value={props.tipoPagamento}
+                // checked={this.state.value === 'that'}
+                // onChange={this.handleChange}
+              />
+            </Form.Field>
+           
+          </Form.Group>
+          <Header as="h4">Notas e Observações</Header>
+          <Form.Group>
+            <Form.TextArea
+              name="observacao"
+              placeholder="Informações complementares aqui..."
+              width={16}
+              value={props.observacao}
+              //onChange={handleInputChange}
             />
           </Form.Group>
         </Form>

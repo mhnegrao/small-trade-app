@@ -13,17 +13,9 @@ import {
   Grid,
 } from 'semantic-ui-react';
 import { Content } from './style';
+import { ITask } from '../../../services/interfaces';
 
-interface ITask {
-  id?: number;
-  titulo?: string;
-  descricao?: string;
-  dataTarefa?: Date;
-  prioridade?: string;
-  completed?: boolean;
-  completed_At?: Date;
-  created_At?: Date;
-}
+
 
 const formatDate = (date: Date, format: string) => {
   let dateFormated = moment(date).format(format);
