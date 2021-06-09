@@ -63,6 +63,7 @@ const Tarefas: React.FC = () => {
     setTasks([...tasks, newTask]);
     resetFields();
   };
+  
   const resetFields = () => {
     Array.from(document.querySelectorAll('input')).forEach(
       (input) => (input.value = '')

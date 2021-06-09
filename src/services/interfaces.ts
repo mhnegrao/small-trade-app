@@ -34,6 +34,9 @@ export interface IServico {
     idUser?:string;
     tipoServico?: string;
     dataVencimento?: Date;
+    diaVencimento?:string;
+    qtdeParcelas?:string;
+    referencia?:string;
     valorParcela?: number;
     created_At?: Date;
     updated_At?: Date;

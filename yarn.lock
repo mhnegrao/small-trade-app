@@ -1708,6 +1708,13 @@
   dependencies:
     "moment" "^2.10.2"
 
+"@types/date-fns@^2.6.0":
+  "integrity" "sha1-sGLKRlYgApCb4MY6ZGftFzE2rME="
+  "resolved" "https://registry.npmjs.org/@types/date-fns/-/date-fns-2.6.0.tgz"
+  "version" "2.6.0"
+  dependencies:
+    "date-fns" "*"
+
 "@types/history@*":
   "integrity" "sha512-S78QIYirQcUoo6UJZx9CSP0O2ix9IaeAXwQi26Rhr/+mg7qqPy8TzaxHSUut7eGjL8WmLccT7/MXf304WjqHcA=="
   "resolved" "https://registry.npmjs.org/@types/history/-/history-4.7.8.tgz"
@@ -1747,6 +1754,11 @@
   dependencies:
     "jest-diff" "^26.0.0"
     "pretty-format" "^26.0.0"
+
+"@types/luxon@^1.26.5":
+  "integrity" "sha512-XeQxxRMyJi1znfzHw4CGDLyup/raj84SnjjkI2fDootZPGlB0yqtvlvEIAmzHDa5wiEI5JJevZOWxpcofsaV+A=="
+  "resolved" "https://registry.npmjs.org/@types/luxon/-/luxon-1.26.5.tgz"
+  "version" "1.26.5"
 
 "@types/moment@^2.13.0":
   "integrity" "sha1-YE69GJvDvDShVIaJQE5hoqSqyJY="
@@ -3966,6 +3978,11 @@
     "abab" "^2.0.0"
     "whatwg-mimetype" "^2.2.0"
     "whatwg-url" "^7.0.0"
+
+"date-fns@*", "date-fns@^2.22.1":
+  "integrity" "sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.22.1.tgz"
+  "version" "2.22.1"
 
 "debug@^2.2.0":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
@@ -7189,6 +7206,11 @@
   "version" "5.1.1"
   dependencies:
     "yallist" "^3.0.2"
+
+"luxon@^1.27.0":
+  "integrity" "sha512-VKsFsPggTA0DvnxtJdiExAucKdAnwbCCNlMM5ENvHlxubqWd0xhZcdb4XgZ7QFNhaRhilXCFxHuoObP5BNA4PA=="
+  "resolved" "https://registry.npmjs.org/luxon/-/luxon-1.27.0.tgz"
+  "version" "1.27.0"
 
 "lz-string@^1.4.4":
   "integrity" "sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY="

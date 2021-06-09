@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { IMensalidade } from '../../../../services/interfaces';
+import { addMonths, format } from 'date-fns';
+const ptBR = require('date-fns/locale/pt-BR');
 import {
   Form,
   Container,
@@ -8,48 +11,102 @@ import {
   Checkbox,
 } from 'semantic-ui-react';
 
-export const MensalidadeCad = () => {
+export const MensalidadeCad = (props: IMensalidade) => {
+
+  const [lancamentos, setLancamentos] = useState([]);
+  const [mensalidade, setMensalidade] = useState<IMensalidade>({});
+  //@ts-ignore
+  const novaEntrada=[{}];
+
+  useEffect(() => {});
+//@ts-ignore
+  const updateMensalidadeList = async (mensalidade) => {
+    //@ts-ignore
+   const newlancto=lancamentos;
+   //@ts-ignore
+   newlancto.push(mensalidade);
+   //console.log(...mensalidade);
+     //@ts-ignore
+     setLancamentos([...lancamentos,newlancto]);
+    //@ts-ignore
+   console.log(lancamentos[lancamentos.length-1]);
+
+    
+  };
+  const gerarParcelas =async () => {
+    let lanctos: Date[] = [];
+
+    //lançamento inicial
+    let start = new Date();
+    let dia = mensalidade.diaVencimento;
+    let mes = start.getMonth() + 1;
+    let ano = start.getFullYear();
+    let newDate = new Date(ano, mes, Number(dia));
+
+    for (let i = 0; i < Number(mensalidade.qtdeParcelas); i++) {
+
+      lanctos = [...lanctos, addMonths(newDate, i)];
+      mensalidade.dataVencimento = lanctos[i];
+      mensalidade.referencia = `${format(
+        lanctos[i],
+        'MMM'
+      ).toUpperCase()}/${format(lanctos[i], 'yyyy')}`;
+         
+       await updateMensalidadeList(mensalidade);
+    }
+    //console.log(lancamentos)
+     
+  };
+
+
   const handleCloseClick = () => {};
-  const handleGerarClick = () => {};
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMensalidade({
+      ...mensalidade,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    gerarParcelas();
+  };
+
   return (
     <>
       <h3>Gerar Mensalidade</h3>
 
-      <Form>
-        {/* <label>
-          <h5>Escolha o modo para gerar</h5>
-        </label> */}
-        {/* <select id="setectTipo">
-            @foreach (var cnt in Enum.GetValues(typeof(TipoMensalidadeGerar)).Cast<TipoMensalidadeGerar>().ToList())
-            {
-                <option value="@((int)cnt)>@cnt.ToString()</option>
-            }
-        </select> */}
-        {/* @if (tipoGerar == (int)TipoMensalidadeGerar.Individual) */}
-        {/* <label>
-          <h5>Escolha um afiliado</h5>
-        </label> */}
-        {/* <select id="setectTipo" value="idAfiliado" @onchange="OnUpdate" class="col col-sm custom-select my-select">
-                        @foreach (var cnt in afiliadoList)
-                        {
-                            <option value="@cnt.Id" >@cnt.Nome</option>
-                        }
-                    </select> */}
-        {/* Selecionado ID: @idAfiliado */}
-        {/* @*else if (tipoGerar == (int)TipoMensalidadeGerar.Lote)
-            {
-                <p>Escolha qtde de Parcelas</p>
-            }*@ */}
-            <Form.Input label="Tipo de Prestação de Serviço"  />
-        <Form.Input
-          label="Informe a quantidade de parcelas"
-          value="qtdeParcelas"
-        />
-        
-        <Form.Input label="Informe o valor das parcelas" value="valorParcela" />
-        <Form.Input label="Informe dia de vencimento" value="diaVencimento" />
-        <Button onclick={handleCloseClick}>Fechar</Button>
-        <Button onclick={handleGerarClick}>Gerar Parcela</Button>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Input
+            label="Prestação de Serviço"
+            name="tipoPrestacao"
+            onChange={handleInputChange}
+          />
+          <Form.Input
+            label="Qtde parcelas"
+            name="qtdeParcelas"
+            value={props.qtdeParcelas}
+            onChange={handleInputChange}
+          />
+          <Form.Input
+            label="Valor das parcelas"
+            name="valorParcela"
+            value={props.valorParcela}
+            onChange={handleInputChange}
+          />
+          <Form.Input
+            label="Dia do vencimento"
+            name="diaVencimento"
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Button type="submit" primary>
+          Gerar Parcela
+        </Button>
+        <Button default onclick={handleCloseClick}>
+          Fechar
+        </Button>
       </Form>
     </>
   );
